@@ -13,8 +13,9 @@ Displays current top charts
 [Chart API](http://api.deezer.com/chart)
 
 Click on:
+
 Artist | Track | Album | Playlist
-------|------|------|------
+------:|:------:|:------:|:------
 [Artist Api][3] | [Track Api][4] | [Album Api][5] | [Playlist API][6]
 
 ### Second view
