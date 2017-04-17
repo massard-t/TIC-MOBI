@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     ListView myListView;
 
-    String[] prenoms = new String[]{"Tracks", "Albums", "Artists"};
+    String[] displayHeaders = new String[]{"Tracks", "Albums", "Artists"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         myListView = (ListView) findViewById(R.id.listView);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, prenoms);
+                android.R.layout.simple_list_item_1, displayHeaders);
         myListView.setAdapter(adapter);
 
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

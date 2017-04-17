@@ -8,11 +8,11 @@ import java.util.List;
  * Created by alexiscoquard on 17/04/2017.
  */
 
-public class TracksChart {
+class TracksChart {
     @SerializedName("data")
     List<Track> tracks;
 
-    public TracksChart(List<Track> tracks) {
+    TracksChart(List<Track> tracks) {
         this.tracks = tracks;
     }
 }

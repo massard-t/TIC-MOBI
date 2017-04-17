@@ -14,7 +14,7 @@ import retrofit2.Response;
  * Created by alexiscoquard on 17/04/2017.
  */
 
-public class TracksChartPresenter {
+class TracksChartPresenter {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private final static String API_KEY = "frZWMPA11XchelzfulMkqCVZEaBFmE67eFrkgGfPYzgyIvckXts";
@@ -24,11 +24,11 @@ public class TracksChartPresenter {
 
     View view;
 
-    public TracksChartPresenter(View view) {
+    TracksChartPresenter(View view) {
         this.view = view;
     }
 
-    public void askAPI() {
+    void askAPI() {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<TracksChart> call = apiService.getTopRatedTracks(API_KEY);
         call.enqueue(new Callback<TracksChart>() {
@@ -52,7 +52,7 @@ public class TracksChartPresenter {
         view.updateTracklist(tracks);
     }
 
-    public interface View {
+    interface View {
         void updateTracklist(List<String> tracks);
     }
 }

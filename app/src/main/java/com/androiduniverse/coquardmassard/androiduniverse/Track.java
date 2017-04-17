@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by alexiscoquard on 17/04/2017.
  */
 
-public class Track {
+class Track {
     @SerializedName("id")
     private int id;
     @SerializedName("title")
@@ -25,7 +25,7 @@ public class Track {
         this.artist = artist;
     }
 
-    public String getTitle() {
+    String getTitle() {
         return this.title;
     }
 }
