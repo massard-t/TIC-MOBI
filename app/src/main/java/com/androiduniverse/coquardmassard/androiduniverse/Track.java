@@ -24,4 +24,8 @@ public class Track {
         this.position = position;
         this.artist = artist;
     }
+
+    public String getTitle() {
+        return this.title;
+    }
 }

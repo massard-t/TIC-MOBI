@@ -5,5 +5,5 @@ package com.androiduniverse.coquardmassard.androiduniverse;
  */
 
 public class Chart {
-    private static final String APIUrl = "";
+
 }
