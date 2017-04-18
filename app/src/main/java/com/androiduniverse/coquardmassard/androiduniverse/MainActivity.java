@@ -1,28 +1,11 @@
 package com.androiduniverse.coquardmassard.androiduniverse;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.ArrayAdapter;
-
-import android.util.Log;
-
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Query;
-
-import static com.androiduniverse.coquardmassard.androiduniverse.R.styleable.View;
+import android.widget.ListView;
 
 
 public class MainActivity extends AppCompatActivity {

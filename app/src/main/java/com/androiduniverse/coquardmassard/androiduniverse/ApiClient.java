@@ -9,6 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 class ApiClient {
     private static final String BASE_URL = "http://api.deezer.com/chart/";
     private static Retrofit retrofit = null;
+    private static final String API_TOKEN = "frEnz2EKsRbX5tzWQDJJAsmwpXh0HtOjJBFRjOXzORjDJBGst5";
 
 
     static Retrofit getClient() {

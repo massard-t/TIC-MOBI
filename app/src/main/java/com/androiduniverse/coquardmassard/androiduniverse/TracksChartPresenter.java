@@ -17,7 +17,7 @@ import retrofit2.Response;
 class TracksChartPresenter {
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    private final static String API_KEY = "frZWMPA11XchelzfulMkqCVZEaBFmE67eFrkgGfPYzgyIvckXts";
+    private final static String API_KEY = "frEnz2EKsRbX5tzWQDJJAsmwpXh0HtOjJBFRjOXzORjDJBGst5";
 
     private List<String> tracks = new ArrayList<String>();
     private TracksChart trackschart;
@@ -29,6 +29,7 @@ class TracksChartPresenter {
     }
 
     void askAPI() {
+        Log.i(TAG, "Inside askAPI, preparing call to the deezer API");
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<TracksChart> call = apiService.getTopRatedTracks(API_KEY);
         call.enqueue(new Callback<TracksChart>() {
