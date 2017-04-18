@@ -43,6 +43,7 @@ class TracksChartPresenter {
                 Log.d(TAG, "" + trackschart.tracks.size());
 
                 //Log.d(TAG, "Number of movies received: " + tracks.size());
+                view.updateTracklist(tracks);
             }
 
             public void onFailure(Call<TracksChart>call, Throwable t) {
@@ -50,7 +51,6 @@ class TracksChartPresenter {
                 Log.e(TAG, t.toString());
             }
         });
-        view.updateTracklist(tracks);
     }
 
     interface View {

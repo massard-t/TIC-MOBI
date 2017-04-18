@@ -33,8 +33,12 @@ public class TracksChartActivity extends AppCompatActivity implements TracksChar
     }
 
     public void updateTracklist(List<String> tracks) {
+        Log.i("updateTracklist", "updating tracks");
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, tracks);
+        Log.i("updateTracklist", "after creating adapter");
         tracksChartView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
     }
 }
