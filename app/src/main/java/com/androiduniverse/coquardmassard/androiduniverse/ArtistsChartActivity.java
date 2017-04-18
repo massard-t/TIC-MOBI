@@ -1,7 +1,7 @@
 package com.androiduniverse.coquardmassard.androiduniverse;
 
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -9,32 +9,30 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TracksChartActivity extends AppCompatActivity implements MetaPresenter.View {
+public class ArtistsChartActivity extends AppCompatActivity implements MetaPresenter.View {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private final static String API_KEY = "frZWMPA11XchelzfulMkqCVZEaBFmE67eFrkgGfPYzgyIvckXts";
 
 
-    public ListView tracksChartView;
-    List<String> tracks = new ArrayList<String>();
+    public ListView artistsChartView;
+    List<String> artists = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         MetaPresenter presenter = new MetaPresenter(this);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tracks_chart);
-        tracksChartView = (ListView) findViewById(R.id.TracksListView);
+        setContentView(R.layout.activity_artists_chart);
+        artistsChartView = (ListView) findViewById(R.id.ArtistListView);
         presenter.askAPI();
     }
 
-    public void updateList(List<String> tracks) {
-        Log.i("updateTracklist", "updating tracks");
+    @Override
+    public void updateList(List<String> artists) {
+        Log.i("ArtistsChartActivity", "Updating artists");
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, tracks);
-        Log.i("updateTracklist", "after creating adapter");
-        tracksChartView.setAdapter(adapter);
+                android.R.layout.simple_list_item_1, artists);
+        artistsChartView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-
     }
 }
-

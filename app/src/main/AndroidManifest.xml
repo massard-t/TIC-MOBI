@@ -18,7 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TracksChartActivity"></activity>
+        <activity android:name=".TracksChartActivity" />
+        <activity android:name=".ArtistsChartActivity"></activity>
     </application>
 
 </manifest>

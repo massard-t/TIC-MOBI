@@ -13,4 +13,7 @@ import retrofit2.http.Query;
 public interface ApiInterface {
     @GET("0/tracks")
     Call<TracksChart> getTopRatedTracks(@Query("api_key") String apiKey);
+
+    @GET("0/artists")
+    Call<ArtistsChart> getTopRatedArtists(@Query("api_key") String apiKey);
 }

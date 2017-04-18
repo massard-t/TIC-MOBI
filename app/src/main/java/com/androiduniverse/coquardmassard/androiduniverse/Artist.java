@@ -18,4 +18,8 @@ public class Artist {
         this.name = name;
         this.link = link;
     }
+
+    public String getName() {
+        return name;
+    }
 }
