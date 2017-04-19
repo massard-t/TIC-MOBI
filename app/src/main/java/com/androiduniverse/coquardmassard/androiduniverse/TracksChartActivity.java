@@ -33,8 +33,6 @@ public class TracksChartActivity extends AppCompatActivity implements MetaPresen
                 android.R.layout.simple_list_item_1, tracks);
         Log.i("updateTracklist", "after creating adapter");
         tracksChartView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-
     }
 }
 

@@ -34,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
                         //based on item add info to intent
                         break;
                     case 1:
+                        intent = new Intent(getApplicationContext(), AlbumsChartActivity.class);
+                        break;
+                    case 2:
                         intent = new Intent(getApplicationContext(), ArtistsChartActivity.class);
                         break;
                 }

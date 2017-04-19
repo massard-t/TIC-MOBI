@@ -22,6 +22,7 @@ class MetaPresenter {
     private List<String> elements = new ArrayList<String>();
     private TracksChart trackschart;
     private ArtistsChart artistchart;
+    private AlbumsChart  albumschart;
 
     View view;
 
@@ -41,6 +42,8 @@ class MetaPresenter {
             case "ArtistsChartActivity":
                 callArtists(this.view, apiService);
                 break;
+            case "AlbumsChartActivity":
+                callAlbums(this.view, apiService);
         }
     }
 
@@ -69,6 +72,7 @@ class MetaPresenter {
     void callTracks(View v, ApiInterface apiService) {
         Call<TracksChart>call =  apiService.getTopRatedTracks(API_KEY);
         call.enqueue(new Callback<TracksChart>() {
+            @Override
             public void onResponse(Call<TracksChart>call, Response<TracksChart> response) {
                 trackschart = new TracksChart(response.body().tracks);
 
@@ -80,13 +84,35 @@ class MetaPresenter {
 
                 view.updateList(elements);
             }
-
+            @Override
             public void onFailure(Call<TracksChart>call, Throwable t) {
                 // Log error here since request failed
                 Log.e(TAG, t.toString());
             }
         });
+    }
 
+    void callAlbums(View v,  ApiInterface apiService) {
+        Call<AlbumsChart>call = apiService.getTopRatedAlbums(API_KEY);
+        call.enqueue(new Callback<AlbumsChart>() {
+            @Override
+            public void onResponse(Call<AlbumsChart> call, Response<AlbumsChart> response) {
+                albumschart = new AlbumsChart(response.body().albums);
+
+                for (int i = 0 ; i < albumschart.albums.size() ; i++) {
+                    elements.add(albumschart.albums.get(i).getTitle());
+                }
+
+                Log.d("onResponseAlbumAPI", "number of elements received: " + albumschart.albums.size());
+
+                view.updateList(elements);
+            }
+
+            @Override
+            public void onFailure(Call<AlbumsChart> call, Throwable t) {
+                Log.e(TAG, t.toString());
+            }
+        });
     }
 
     interface View {

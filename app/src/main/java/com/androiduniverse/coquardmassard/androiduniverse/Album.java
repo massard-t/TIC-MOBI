@@ -19,4 +19,8 @@ public class Album {
         this.title = title;
         this.artist = artist;
     }
+
+    public String getTitle() {
+        return this.title;
+    }
 }

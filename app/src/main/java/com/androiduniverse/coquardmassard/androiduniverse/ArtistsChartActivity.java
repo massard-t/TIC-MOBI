@@ -16,7 +16,6 @@ public class ArtistsChartActivity extends AppCompatActivity implements MetaPrese
 
 
     public ListView artistsChartView;
-    List<String> artists = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +32,6 @@ public class ArtistsChartActivity extends AppCompatActivity implements MetaPrese
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, artists);
         artistsChartView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        //adapter.notifyDataSetChanged();
     }
 }

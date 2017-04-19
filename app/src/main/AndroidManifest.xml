@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".TracksChartActivity" />
-        <activity android:name=".ArtistsChartActivity"></activity>
+        <activity android:name=".ArtistsChartActivity" />
+        <activity android:name=".AlbumsChartActivity"></activity>
     </application>
 
 </manifest>
