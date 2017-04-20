@@ -28,4 +28,5 @@ class Track {
     String getTitle() {
         return this.title;
     }
+    Artist getArtist() { return this.artist; }
 }

@@ -1,4 +1,6 @@
 package com.androiduniverse.coquardmassard.androiduniverse;
+import android.media.Image;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -12,14 +14,20 @@ public class Artist {
     private String name;
     @SerializedName("link")
     private String link;
+    @SerializedName("picture")
+    private String picture;
 
-    public Artist(int id, String name, String link) {
+    private Image image;
+
+    public Artist(int id, String name, String link, String picture) {
         this.id = id;
         this.name = name;
         this.link = link;
+        this.picture = picture;
     }
 
     public String getName() {
         return name;
     }
+    public String getPicture() { return picture; }
 }

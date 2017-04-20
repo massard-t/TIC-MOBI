@@ -20,7 +20,8 @@
         </activity>
         <activity android:name=".TracksChartActivity" />
         <activity android:name=".ArtistsChartActivity" />
-        <activity android:name=".AlbumsChartActivity"></activity>
+        <activity android:name=".AlbumsChartActivity" />
+        <activity android:name=".TrackDetailsActivity"></activity>
     </application>
 
 </manifest>

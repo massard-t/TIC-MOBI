@@ -18,7 +18,7 @@ public class AlbumsChartActivity extends AppCompatActivity implements MetaPresen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_albums_chart);
         albumschartlistview = (ListView) findViewById(R.id.AlbumsListView);
-        presenter.askAPI();
+        presenter.askAlbumsChart();
     }
 
     @Override

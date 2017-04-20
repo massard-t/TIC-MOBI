@@ -14,9 +14,9 @@ public class TracksChartActivity extends AppCompatActivity implements MetaPresen
     private static final String TAG = MainActivity.class.getSimpleName();
     private final static String API_KEY = "frZWMPA11XchelzfulMkqCVZEaBFmE67eFrkgGfPYzgyIvckXts";
 
+    private List<Track> tracks;
 
     public ListView tracksChartView;
-    List<String> tracks = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +24,7 @@ public class TracksChartActivity extends AppCompatActivity implements MetaPresen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracks_chart);
         tracksChartView = (ListView) findViewById(R.id.TracksListView);
-        presenter.askAPI();
+        presenter.askTracksChart();
     }
 
     public void updateList(List<String> tracks) {

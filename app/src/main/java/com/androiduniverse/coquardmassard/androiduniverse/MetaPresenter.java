@@ -1,10 +1,13 @@
 package com.androiduniverse.coquardmassard.androiduniverse;
 
+import android.app.Activity;
+import android.media.Image;
 import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -17,7 +20,6 @@ import retrofit2.Response;
 class MetaPresenter {
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    private final static String API_KEY = "frEnz2EKsRbX5tzWQDJJAsmwpXh0HtOjJBFRjOXzORjDJBGst5";
 
     private List<String> elements = new ArrayList<String>();
     private TracksChart trackschart;
@@ -25,40 +27,50 @@ class MetaPresenter {
     private AlbumsChart  albumschart;
 
     View view;
+    ArtistView artistView = null;
+    ApiInterface apiService = null;
 
     MetaPresenter(View view) {
+        apiService = ApiClient.getClient().create(ApiInterface.class);
         Log.i("MetaPresenter INIT", view.toString());
         this.view = view;
     }
 
-    void askAPI() {
-        Log.i(TAG, "Inside askAPI, preparing call to the deezer API");
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-
-        switch (view.getClass().getSimpleName()) {
-            case "TracksChartActivity":
-                callTracks(this.view, apiService);
-                break;
-            case "ArtistsChartActivity":
-                callArtists(this.view, apiService);
-                break;
-            case "AlbumsChartActivity":
-                callAlbums(this.view, apiService);
-        }
+    MetaPresenter(ArtistView view) {
+        apiService = ApiClient.getClient().create(ApiInterface.class);
+        Log.i("MetaPresenter INIT", view.toString());
+        this.artistView = view;
     }
 
-    void callArtists(View v, ApiInterface apiService) {
-        Call<ArtistsChart> call = apiService.getTopRatedArtists(API_KEY);
+    void askTracksChart() {
+        callTracks(this.view, apiService);
+    }
+
+    void askArtistsChart() {
+        callArtists(this.artistView, apiService);
+    }
+
+    void askAlbumsChart() {
+        callAlbums(this.view, apiService);
+    }
+
+    void callArtists(ArtistView v, ApiInterface apiService) {
+        Call<ArtistsChart> call = apiService.getTopRatedArtists();
         call.enqueue(new Callback<ArtistsChart>() {
             @Override
             public void onResponse(Call<ArtistsChart> call, Response<ArtistsChart> response) {
                 artistchart = new ArtistsChart(response.body().artists);
 
+                List<String> images = new ArrayList<>();
+
                 for (int i = 0; i < artistchart.artists.size(); i++) {
                     elements.add(artistchart.artists.get(i).getName());
+                    images.add(artistchart.artists.get(i).getPicture());
                 }
+
                 Log.d("onResponseArtistAPI", "Number of elements received: " + artistchart.artists.size());
-                view.updateList(elements);
+                CustomList adapter = new CustomList((Activity) artistView, elements, images);
+                artistView.updateList(adapter);
             }
 
             @Override
@@ -70,14 +82,14 @@ class MetaPresenter {
     }
 
     void callTracks(View v, ApiInterface apiService) {
-        Call<TracksChart>call =  apiService.getTopRatedTracks(API_KEY);
+        Call<TracksChart>call =  apiService.getTopRatedTracks();
         call.enqueue(new Callback<TracksChart>() {
             @Override
             public void onResponse(Call<TracksChart>call, Response<TracksChart> response) {
                 trackschart = new TracksChart(response.body().tracks);
 
                 for (int i = 0 ; i < trackschart.tracks.size() ; i++) {
-                    elements.add(trackschart.tracks.get(i).getTitle());
+                    elements.add(trackschart.tracks.get(i).getTitle() + "  -  " + trackschart.tracks.get(i).getArtist().getName());
                 }
 
                 Log.d("onResponseTrackAPI", "Number of elements received: " + trackschart.tracks.size());
@@ -93,14 +105,14 @@ class MetaPresenter {
     }
 
     void callAlbums(View v,  ApiInterface apiService) {
-        Call<AlbumsChart>call = apiService.getTopRatedAlbums(API_KEY);
+        Call<AlbumsChart>call = apiService.getTopRatedAlbums();
         call.enqueue(new Callback<AlbumsChart>() {
             @Override
             public void onResponse(Call<AlbumsChart> call, Response<AlbumsChart> response) {
                 albumschart = new AlbumsChart(response.body().albums);
 
                 for (int i = 0 ; i < albumschart.albums.size() ; i++) {
-                    elements.add(albumschart.albums.get(i).getTitle());
+                    elements.add(albumschart.albums.get(i).getTitle() + "  -  " + albumschart.albums.get(i).getArtist().getName());
                 }
 
                 Log.d("onResponseAlbumAPI", "number of elements received: " + albumschart.albums.size());
@@ -117,5 +129,14 @@ class MetaPresenter {
 
     interface View {
         void updateList(List<String> elements);
+    }
+
+    interface AlbumView {
+        void updateList(List<String> album, List<Image> images);
+    }
+
+    interface ArtistView {
+        //void updateList(List<String> artist, List<String> images);
+        void updateList(CustomList list);
     }
 }
