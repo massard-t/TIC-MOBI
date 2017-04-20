@@ -1,6 +1,7 @@
 package com.androiduniverse.coquardmassard.androiduniverse;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.media.Image;
 import android.util.Log;
 import android.view.View;
@@ -120,15 +121,18 @@ class MetaPresenter {
                 albumschart = new AlbumsChart(response.body().albums);
 
                 List<String> cover = new ArrayList<String>();
+                List<Integer> ids = new ArrayList<Integer>();
 
                 for (int i = 0 ; i < albumschart.albums.size() ; i++) {
                     elements.add(albumschart.albums.get(i).getTitle() + "  -  " + albumschart.albums.get(i).getArtist().getName());
                     cover.add(albumschart.albums.get(i).getCover());
+                    ids.add(albumschart.albums.get(i).getId());
                 }
 
                 Log.d("onResponseAlbumAPI", "number of elements received: " + albumschart.albums.size());
                 CustomList adapter = new CustomList((Activity) albumView, elements, cover);
-                albumView.updateList(adapter);
+
+                albumView.updateList(adapter, albumschart);
             }
 
             @Override
@@ -143,11 +147,10 @@ class MetaPresenter {
     }
 
     interface AlbumView {
-        void updateList(CustomList list);
+        void updateList(CustomList list, AlbumsChart albumschart);
     }
 
     interface ArtistView {
-        //void updateList(List<String> artist, List<String> images);
         void updateList(CustomList list);
     }
 }

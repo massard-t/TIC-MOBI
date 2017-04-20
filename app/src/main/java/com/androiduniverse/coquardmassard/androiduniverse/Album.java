@@ -32,4 +32,6 @@ public class Album {
     }
 
     public String getCover() { return  this.cover; }
+
+    public int getId() { return this.id; }
 }

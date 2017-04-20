@@ -21,7 +21,8 @@
         <activity android:name=".TracksChartActivity" />
         <activity android:name=".ArtistsChartActivity" />
         <activity android:name=".AlbumsChartActivity" />
-        <activity android:name=".TrackDetailsActivity"></activity>
+        <activity android:name=".TrackDetailsActivity" />
+        <activity android:name=".AlbumDetailsActivity"></activity>
     </application>
 
 </manifest>

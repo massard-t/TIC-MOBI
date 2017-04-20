@@ -11,15 +11,18 @@ import retrofit2.http.Query;
  */
 
 public interface ApiInterface {
-    @GET("0/tracks")
+    @GET("chart/0/tracks")
     Call<TracksChart> getTopRatedTracks();
     //Call<TracksChart> getTopRatedTracks(@Query("api_key") String apiKey);
 
-    @GET("0/artists")
+    @GET("chart/0/artists")
     Call<ArtistsChart> getTopRatedArtists();
     //Call<ArtistsChart> getTopRatedArtists(@Query("api_key") String apiKey);
 
-    @GET("0/albums")
+    @GET("chart/0/albums")
     Call<AlbumsChart> getTopRatedAlbums();
     //Call<AlbumsChart> getTopRatedAlbums(@Query("api_key") String apiKey);
+
+    @GET("album/{id}/tracks")
+    Call<TracksChart> getAlbumTracklist(@Path("id") int id);
 }
