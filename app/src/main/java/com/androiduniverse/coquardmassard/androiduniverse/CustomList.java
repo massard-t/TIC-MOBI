@@ -57,7 +57,6 @@ public class CustomList extends ArrayAdapter<String> {
                 try  {
                     try {
                         bmp[0] = BitmapFactory.decodeStream(finalUrl.openConnection().getInputStream());
-                        //bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
                         imageView.setImageBitmap(bmp[0]);
                     } catch (IOException e) {
                         e.printStackTrace();

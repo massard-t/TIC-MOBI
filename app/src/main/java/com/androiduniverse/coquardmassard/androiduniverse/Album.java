@@ -13,11 +13,14 @@ public class Album {
     private String title;
     @SerializedName("artist")
     private Artist artist;
+    @SerializedName("cover")
+    private String cover;
 
-    public Album(int id, String title, Artist artist) {
+    public Album(int id, String title, Artist artist, String cover) {
         this.id = id;
         this.title = title;
         this.artist = artist;
+        this.cover = cover;
     }
 
     public String getTitle() {
@@ -27,4 +30,6 @@ public class Album {
     public Artist getArtist() {
         return this.artist;
     }
+
+    public String getCover() { return  this.cover; }
 }

@@ -8,7 +8,7 @@ import android.widget.ListView;
 
 import java.util.List;
 
-public class AlbumsChartActivity extends AppCompatActivity implements MetaPresenter.View {
+public class AlbumsChartActivity extends AppCompatActivity implements MetaPresenter.AlbumView {
 
     public ListView albumschartlistview;
 
@@ -22,10 +22,8 @@ public class AlbumsChartActivity extends AppCompatActivity implements MetaPresen
     }
 
     @Override
-    public void updateList(List<String> albums) {
+    public void updateList(CustomList list) {
         Log.i("AlbumsChartActivity", "Updating albums");
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, albums);
-        albumschartlistview.setAdapter(adapter);
+        albumschartlistview.setAdapter(list);
     }
 }

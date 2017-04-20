@@ -28,6 +28,8 @@ class MetaPresenter {
 
     View view;
     ArtistView artistView = null;
+    AlbumView albumView = null;
+
     ApiInterface apiService = null;
 
     MetaPresenter(View view) {
@@ -42,6 +44,12 @@ class MetaPresenter {
         this.artistView = view;
     }
 
+    MetaPresenter(AlbumView view) {
+        apiService = ApiClient.getClient().create(ApiInterface.class);
+        Log.i("MetaPresenter INIT", view.toString());
+        this.albumView = view;
+    }
+
     void askTracksChart() {
         callTracks(this.view, apiService);
     }
@@ -51,7 +59,7 @@ class MetaPresenter {
     }
 
     void askAlbumsChart() {
-        callAlbums(this.view, apiService);
+        callAlbums(this.albumView, apiService);
     }
 
     void callArtists(ArtistView v, ApiInterface apiService) {
@@ -104,20 +112,23 @@ class MetaPresenter {
         });
     }
 
-    void callAlbums(View v,  ApiInterface apiService) {
+    void callAlbums(AlbumView v,  ApiInterface apiService) {
         Call<AlbumsChart>call = apiService.getTopRatedAlbums();
         call.enqueue(new Callback<AlbumsChart>() {
             @Override
             public void onResponse(Call<AlbumsChart> call, Response<AlbumsChart> response) {
                 albumschart = new AlbumsChart(response.body().albums);
 
+                List<String> cover = new ArrayList<String>();
+
                 for (int i = 0 ; i < albumschart.albums.size() ; i++) {
                     elements.add(albumschart.albums.get(i).getTitle() + "  -  " + albumschart.albums.get(i).getArtist().getName());
+                    cover.add(albumschart.albums.get(i).getCover());
                 }
 
                 Log.d("onResponseAlbumAPI", "number of elements received: " + albumschart.albums.size());
-
-                view.updateList(elements);
+                CustomList adapter = new CustomList((Activity) albumView, elements, cover);
+                albumView.updateList(adapter);
             }
 
             @Override
@@ -132,7 +143,7 @@ class MetaPresenter {
     }
 
     interface AlbumView {
-        void updateList(List<String> album, List<Image> images);
+        void updateList(CustomList list);
     }
 
     interface ArtistView {
