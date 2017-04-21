@@ -26,6 +26,7 @@ public class AlbumDetailsActivity extends AppCompatActivity implements AlbumDeta
     String albumTitle = null;
     String albumCover = null;
     String albumArtist = null;
+    String albumShareLink = null;
 
     ListView albumTracklistListView;
     TextView albumTitleTextView;
@@ -46,13 +47,21 @@ public class AlbumDetailsActivity extends AppCompatActivity implements AlbumDeta
         albumCoverImageView = (ImageView) findViewById(R.id.albumCover);
         shareButton = (Button) findViewById(R.id.shareButton);
 
+        Bundle extras = getIntent().getExtras();
+
+        this.albumId = extras.getInt("id");
+        this.albumTitle = extras.getString("title");
+        this.albumCover = extras.getString("cover");
+        this.albumArtist = extras.getString("artist");
+        this.albumShareLink = extras.getString("shareLink");
+
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_SEND);
                 intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_TEXT, "test");
+                intent.putExtra(Intent.EXTRA_TEXT, albumShareLink);
 //                intent.putExtra(android.content.Intent.EXTRA_TITLE, "Découvrez la bière "+beer.name);
 //                intent.setType("image/png");
 //                intent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
@@ -60,12 +69,6 @@ public class AlbumDetailsActivity extends AppCompatActivity implements AlbumDeta
             }
         });
 
-        Bundle extras = getIntent().getExtras();
-
-        this.albumId = extras.getInt("id");
-        this.albumTitle = extras.getString("title");
-        this.albumCover = extras.getString("cover");
-        this.albumArtist = extras.getString("artist");
         albumTitleTextView.setText(this.albumTitle + "  -  " + this.albumArtist);
         loadImage();
 

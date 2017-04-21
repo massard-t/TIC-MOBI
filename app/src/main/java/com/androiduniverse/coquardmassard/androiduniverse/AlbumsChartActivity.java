@@ -33,6 +33,7 @@ public class AlbumsChartActivity extends AppCompatActivity implements MetaPresen
                 intent.putExtra("title", albumchart.albums.get(position).getTitle());
                 intent.putExtra("cover", albumchart.albums.get(position).getCover());
                 intent.putExtra("artist", albumchart.albums.get(position).getArtist().getName());
+                intent.putExtra("shareLink", albumchart.albums.get(position).getShareLink());
                 startActivity(intent);
             }
         });

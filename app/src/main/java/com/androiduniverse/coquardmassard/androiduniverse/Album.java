@@ -16,7 +16,7 @@ public class Album {
     @SerializedName("cover")
     private String cover;
 
-    public Album(int id, String title, Artist artist, String cover) {
+    public Album(int id, String title, Artist artist, String cover, String shareLink) {
         this.id = id;
         this.title = title;
         this.artist = artist;
@@ -34,4 +34,6 @@ public class Album {
     public String getCover() { return  this.cover; }
 
     public int getId() { return this.id; }
+
+    public String getShareLink() { return ("http://www.deezer.com/album/" + this.id); }
 }
