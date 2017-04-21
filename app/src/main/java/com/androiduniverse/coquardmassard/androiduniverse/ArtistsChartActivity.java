@@ -3,6 +3,7 @@ package com.androiduniverse.coquardmassard.androiduniverse;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -24,6 +25,10 @@ public class ArtistsChartActivity extends AppCompatActivity implements MetaPrese
     protected void onCreate(Bundle savedInstanceState) {
         MetaPresenter presenter = new MetaPresenter(this);
         super.onCreate(savedInstanceState);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.artisttoolbar);
+        setSupportActionBar(toolbar);
+
         setContentView(R.layout.activity_artists_chart);
         artistsChartView = (ListView) findViewById(R.id.ArtistListView);
         presenter.askArtistsChart();
