@@ -40,7 +40,7 @@ public class AlbumDetailsPresenter {
                 tracklist = new TracksChart(response.body().tracks);
 
                 for (int i = 0 ; i < tracklist.tracks.size() ; i++) {
-                    titles.add(tracklist.tracks.get(i).getTitle());
+                    titles.add(i + 1 + "  -  " + tracklist.tracks.get(i).getTitle());
                 }
 
                 Log.d("onResponseTrackAPI", "Number of elements received: " + tracklist.tracks.size());
