@@ -1,10 +1,17 @@
 package com.androiduniverse.coquardmassard.androiduniverse;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,13 +31,34 @@ public class AlbumDetailsActivity extends AppCompatActivity implements AlbumDeta
     TextView albumTitleTextView;
     ImageView albumCoverImageView;
 
+    Button shareButton = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_album_details);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         albumTracklistListView = (ListView) findViewById(R.id.AlbumTracklistView);
         albumTitleTextView = (TextView) findViewById(R.id.albumTitle);
         albumCoverImageView = (ImageView) findViewById(R.id.albumCover);
+        shareButton = (Button) findViewById(R.id.shareButton);
+
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_TEXT, "test");
+//                intent.putExtra(android.content.Intent.EXTRA_TITLE, "Découvrez la bière "+beer.name);
+//                intent.setType("image/png");
+//                intent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
+                startActivity(Intent.createChooser(intent, "Share"));
+            }
+        });
 
         Bundle extras = getIntent().getExtras();
 
