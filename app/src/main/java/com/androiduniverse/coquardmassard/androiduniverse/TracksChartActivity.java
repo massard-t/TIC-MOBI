@@ -3,6 +3,8 @@ package com.androiduniverse.coquardmassard.androiduniverse;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -20,11 +22,19 @@ public class TracksChartActivity extends AppCompatActivity implements MetaPresen
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        MetaPresenter presenter = new MetaPresenter(this);
+        final MetaPresenter presenter = new MetaPresenter(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracks_chart);
         tracksChartView = (ListView) findViewById(R.id.TracksListView);
         presenter.askTracksChart();
+
+
+        tracksChartView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                presenter.playPreview(position);
+            }
+        });
     }
 
     public void updateList(List<String> tracks) {

@@ -3,9 +3,11 @@ package com.androiduniverse.coquardmassard.androiduniverse;
 import android.app.Activity;
 import android.content.Intent;
 import android.media.Image;
+import android.media.MediaPlayer;
 import android.util.Log;
 import android.view.View;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -26,6 +28,9 @@ class MetaPresenter {
     private TracksChart trackschart;
     private ArtistsChart artistchart;
     private AlbumsChart  albumschart;
+
+    private boolean isPlaying = false;
+    MediaPlayer mp = null;
 
     View view;
     ArtistView artistView = null;
@@ -140,6 +145,28 @@ class MetaPresenter {
                 Log.e(TAG, t.toString());
             }
         });
+    }
+
+    public void playPreview(int position) {
+        if (!isPlaying) {
+            isPlaying = true;
+            try {
+                mp = new MediaPlayer();
+                mp.setDataSource(trackschart.tracks.get(position).getPreview());
+                mp.prepare();
+                mp.start();
+            } catch (IOException e) {
+                Log.e("audio", "prepare() failed");
+            }
+        } else {
+            isPlaying = false;
+            stopPlaying(mp);
+        }
+    }
+
+    private void stopPlaying(MediaPlayer mp) {
+        mp.release();
+        mp = null;
     }
 
     interface View {
