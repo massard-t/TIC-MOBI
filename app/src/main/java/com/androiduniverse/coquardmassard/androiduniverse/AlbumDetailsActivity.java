@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -73,8 +74,15 @@ public class AlbumDetailsActivity extends AppCompatActivity implements AlbumDeta
         loadImage();
 
 
-        AlbumDetailsPresenter presenter = new AlbumDetailsPresenter(this, albumId);
+        final AlbumDetailsPresenter presenter = new AlbumDetailsPresenter(this, albumId);
         presenter.askTracklist();
+
+        albumTracklistListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                presenter.playPreview(position);
+            }
+        });
     }
 
     @Override

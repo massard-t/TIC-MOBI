@@ -1,8 +1,10 @@
 package com.androiduniverse.coquardmassard.androiduniverse;
 
+import android.media.MediaPlayer;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +17,10 @@ import retrofit2.Response;
  */
 
 public class AlbumDetailsPresenter {
+
+    private boolean isPlaying = false;
+    private int previewRelativeId = -1;
+    MediaPlayer mp = null;
 
     private AlbumDetailsActivity albumView;
     ApiInterface apiService = null;
@@ -54,6 +60,28 @@ public class AlbumDetailsPresenter {
                 Log.e("albumpresenter", t.toString());
             }
         });
+    }
+
+    public void playPreview(int position) {
+        if (mp != null) {
+            mp.release();
+        }
+        if (this.previewRelativeId != position || isPlaying == false) {
+            try {
+                isPlaying = true;
+                this.previewRelativeId = position;
+                mp = new MediaPlayer();
+                mp.setDataSource(tracklist.tracks.get(position).getPreview());
+                mp.prepare();
+                mp.start();
+            } catch (IOException e) {
+                Log.e("audio", "prepare() failed");
+            }
+        }
+        else {
+            mp.release();
+            isPlaying = false;
+        }
     }
 
     interface AlbumView {
