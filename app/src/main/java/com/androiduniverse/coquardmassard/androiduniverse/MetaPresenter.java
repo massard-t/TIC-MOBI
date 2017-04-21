@@ -147,7 +147,7 @@ class MetaPresenter {
         });
     }
 
-    public void playPreview(int position) {
+    /*public void playPreview(int position) {
         if (!isPlaying) {
             isPlaying = true;
             try {
@@ -161,6 +161,21 @@ class MetaPresenter {
         } else {
             isPlaying = false;
             stopPlaying(mp);
+
+        }
+    }*/
+
+    public void playPreview(int position) {
+        try {
+            if (mp != null) {
+                mp.release();
+            }
+            mp = new MediaPlayer();
+            mp.setDataSource(trackschart.tracks.get(position).getPreview());
+            mp.prepare();
+            mp.start();
+        } catch (IOException e) {
+            Log.e("audio", "prepare() failed");
         }
     }
 
