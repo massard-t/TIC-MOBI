@@ -30,6 +30,7 @@ class MetaPresenter {
     private AlbumsChart  albumschart;
 
     private boolean isPlaying = false;
+    private int previewRelativeId = -1;
     MediaPlayer mp = null;
 
     View view;
@@ -147,36 +148,27 @@ class MetaPresenter {
         });
     }
 
-    /*public void playPreview(int position) {
-        if (!isPlaying) {
-            isPlaying = true;
-            try {
-                mp = new MediaPlayer();
-                mp.setDataSource(trackschart.tracks.get(position).getPreview());
-                mp.prepare();
-                mp.start();
-            } catch (IOException e) {
-                Log.e("audio", "prepare() failed");
-            }
-        } else {
-            isPlaying = false;
-            stopPlaying(mp);
-
-        }
-    }*/
 
     public void playPreview(int position) {
-        try {
             if (mp != null) {
                 mp.release();
             }
-            mp = new MediaPlayer();
-            mp.setDataSource(trackschart.tracks.get(position).getPreview());
-            mp.prepare();
-            mp.start();
-        } catch (IOException e) {
-            Log.e("audio", "prepare() failed");
-        }
+            if (this.previewRelativeId != position || isPlaying == false) {
+                try {
+                    isPlaying = true;
+                    this.previewRelativeId = position;
+                    mp = new MediaPlayer();
+                    mp.setDataSource(trackschart.tracks.get(position).getPreview());
+                    mp.prepare();
+                    mp.start();
+                } catch (IOException e) {
+                    Log.e("audio", "prepare() failed");
+                }
+            }
+            else {
+                mp.release();
+                isPlaying = false;
+            }
     }
 
     private void stopPlaying(MediaPlayer mp) {
