@@ -1,6 +1,6 @@
 # AndroidUniverse
 
-> School project's aiming to create a simple client for a public API.
+> School's project aiming to create a simple client for a public API.
 
 ## Deezer API
 
